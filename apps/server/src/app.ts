@@ -1,6 +1,6 @@
 import { timingSafeEqual } from 'node:crypto';
 import express, { type NextFunction, type Request, type Response } from 'express';
-import { LimitsUpdateSchema, computeStatus } from '@guiltfree/shared';
+import { LimitsUpdateSchema, computeStatus, type StatusResponse } from '@guiltfree/shared';
 import type { Config } from './config';
 import type { GoogleAuth } from './gmail/google';
 import type { EmailSource } from './gmail/types';
@@ -65,14 +65,15 @@ export function createApp(deps: AppDeps) {
       store.getSyncState(),
       source.isConnected(),
     ]);
-    res.json({
+    const body: StatusResponse = {
       now: now().toISOString(),
       settings,
       status: computeStatus(orders, settings, now()),
       gmail: { mode: source.mode, connected },
       llm: { mode: llm ? 'live' : 'mock', model: llm?.model ?? null },
       sync: syncState,
-    });
+    };
+    res.json(body);
   });
 
   app.get('/orders', async (req, res) => {
