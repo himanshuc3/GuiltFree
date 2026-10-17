@@ -1,0 +1,13 @@
+{
+  "name": "guiltfree",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev:server": "npm run dev -w @guiltfree/server",
+    "dev:mobile": "npm run start -w @guiltfree/mobile",
+    "test": "npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "check:secrets": "node scripts/check-secrets.mjs"
+  }
+}

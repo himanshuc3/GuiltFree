@@ -1,0 +1,20 @@
+node_modules/
+dist/
+.expo/
+android/
+ios/
+.data/
+*.log
+
+# secrets: never commit real credentials, only .env.example
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+google-token*.json
+client_secret*.json
+
+# raw emails contain personal data; only redacted fixtures belong in git
+*.eml
+*.pdf
